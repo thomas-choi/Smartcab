@@ -1,0 +1,30 @@
+/-----------------------------------------
+| State-action rewards from Q-Learning
+\-----------------------------------------
+
+('light-green', 'waypoint-left', 'oncoming-None')
+ -- left : 1.69
+
+('light-red',)
+ -- None : 2.02
+
+('light-green', 'waypoint-forward')
+ -- forward : 2.00
+
+('light-green', 'waypoint-right')
+ -- right : 1.89
+
+('light-red', 'waypoint-right', 'left-not forward')
+ -- right : 1.60
+
+('light-green', 'waypoint-left', 'oncoming-forward')
+ -- forward : 0.57
+ -- right : 0.11
+
+('light-green', 'waypoint-left', 'oncoming-right')
+ -- forward : 1.00
+ -- right : 0.00
+
+('light-green', 'waypoint-left', 'oncoming-left')
+ -- left : 2.06
+
