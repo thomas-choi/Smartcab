@@ -1,0 +1,484 @@
+/-----------------------------------------
+| State-action rewards from Q-Learning
+\-----------------------------------------
+
+('light-red', 'oncoming-None', 'left-left', 'WP-left')
+ -- forward : -6.85
+ -- right : -0.02
+ -- None : 1.48
+ -- left : -4.74
+
+('light-red', 'oncoming-None', 'left-right', 'WP-forward')
+ -- forward : -4.91
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-forward', 'left-left', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : -19.82
+
+('light-green', 'oncoming-None', 'left-forward', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.04
+ -- None : 0.00
+ -- left : 0.56
+
+('light-green', 'oncoming-left', 'left-None', 'WP-forward')
+ -- forward : 2.10
+ -- right : 0.00
+ -- None : -2.93
+ -- left : 0.00
+
+('light-red', 'oncoming-right', 'left-None', 'WP-left')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.79
+ -- left : -30.40
+
+('light-red', 'oncoming-right', 'left-forward', 'WP-forward')
+ -- forward : -19.62
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-left', 'left-None', 'WP-left')
+ -- forward : 0.23
+ -- right : 0.31
+ -- None : 0.00
+ -- left : 1.51
+
+('light-green', 'oncoming-right', 'left-forward', 'WP-left')
+ -- forward : -0.17
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-left', 'left-None', 'WP-left')
+ -- forward : -7.40
+ -- right : 1.33
+ -- None : 0.00
+ -- left : -16.70
+
+('light-red', 'oncoming-None', 'left-forward', 'WP-left')
+ -- forward : -19.96
+ -- right : -17.92
+ -- None : 1.10
+ -- left : 0.00
+
+('light-green', 'oncoming-None', 'left-left', 'WP-left')
+ -- forward : 0.66
+ -- right : 0.00
+ -- None : -2.06
+ -- left : 0.97
+
+('light-red', 'oncoming-forward', 'left-None', 'WP-left')
+ -- forward : -5.44
+ -- right : 0.00
+ -- None : 1.53
+ -- left : -4.75
+
+('light-green', 'oncoming-forward', 'left-None', 'WP-left')
+ -- forward : -0.18
+ -- right : 0.44
+ -- None : 0.00
+ -- left : -10.31
+
+('light-red', 'oncoming-None', 'left-right', 'WP-left')
+ -- forward : -7.97
+ -- right : 0.40
+ -- None : 1.12
+ -- left : -4.91
+
+('light-green', 'oncoming-forward', 'left-forward', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.85
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-forward', 'left-None', 'WP-right')
+ -- forward : 0.01
+ -- right : 1.52
+ -- None : -2.99
+ -- left : -9.81
+
+('light-red', 'oncoming-None', 'left-None', 'WP-right')
+ -- forward : -11.64
+ -- right : 1.82
+ -- None : 1.31
+ -- left : -12.53
+
+('light-red', 'oncoming-None', 'left-forward', 'WP-forward')
+ -- forward : -30.01
+ -- right : -10.05
+ -- None : 1.36
+ -- left : -19.61
+
+('light-red', 'oncoming-forward', 'left-right', 'WP-right')
+ -- forward : -5.33
+ -- right : 0.00
+ -- None : 0.65
+ -- left : 0.00
+
+('light-green', 'oncoming-left', 'left-forward', 'WP-forward')
+ -- forward : 0.55
+ -- right : 0.84
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-right', 'left-left', 'WP-left')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-right', 'left-None', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : -20.16
+
+('light-green', 'oncoming-left', 'left-left', 'WP-forward')
+ -- forward : 0.83
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-left', 'left-forward', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-None', 'left-forward', 'WP-right')
+ -- forward : -19.56
+ -- right : 0.00
+ -- None : 0.82
+ -- left : 0.00
+
+('light-red', 'oncoming-right', 'left-left', 'WP-right')
+ -- forward : 0.00
+ -- right : 1.25
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-None', 'left-right', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : -2.46
+ -- left : 0.00
+
+('light-green', 'oncoming-None', 'left-None', 'WP-right')
+ -- forward : 0.48
+ -- right : 2.00
+ -- None : -3.70
+ -- left : 0.00
+
+('light-red', 'oncoming-left', 'left-left', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.84
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-None', 'left-None', 'WP-left')
+ -- forward : -0.19
+ -- right : 0.09
+ -- None : -4.77
+ -- left : 1.76
+
+('light-red', 'oncoming-forward', 'left-forward', 'WP-forward')
+ -- forward : -20.17
+ -- right : -9.77
+ -- None : 1.36
+ -- left : 0.00
+
+('light-red', 'oncoming-left', 'left-right', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.89
+ -- left : -4.65
+
+('light-green', 'oncoming-left', 'left-None', 'WP-right')
+ -- forward : 0.00
+ -- right : 1.96
+ -- None : -2.29
+ -- left : 0.17
+
+('light-red', 'oncoming-forward', 'left-forward', 'WP-right')
+ -- forward : -20.04
+ -- right : -9.94
+ -- None : 0.49
+ -- left : 0.00
+
+('light-green', 'oncoming-left', 'left-left', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-forward', 'left-right', 'WP-left')
+ -- forward : 0.49
+ -- right : 0.00
+ -- None : -2.46
+ -- left : 0.00
+
+('light-red', 'oncoming-left', 'left-forward', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 1.13
+ -- left : -19.80
+
+('light-red', 'oncoming-left', 'left-right', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : -5.13
+
+('light-red', 'oncoming-right', 'left-None', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-right', 'left-None', 'WP-right')
+ -- forward : 0.00
+ -- right : 1.37
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-None', 'left-None', 'WP-left')
+ -- forward : -9.88
+ -- right : 0.26
+ -- None : 1.32
+ -- left : -10.50
+
+('light-green', 'oncoming-None', 'left-right', 'WP-left')
+ -- forward : 0.60
+ -- right : 0.00
+ -- None : -2.85
+ -- left : 0.58
+
+('light-green', 'oncoming-None', 'left-right', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.81
+
+('light-green', 'oncoming-right', 'left-None', 'WP-left')
+ -- forward : 0.64
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-left', 'left-right', 'WP-left')
+ -- forward : 0.00
+ -- right : -0.02
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-left', 'left-forward', 'WP-left')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 1.57
+ -- left : 0.00
+
+('light-red', 'oncoming-None', 'left-left', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.45
+ -- None : 1.27
+ -- left : 0.00
+
+('light-green', 'oncoming-right', 'left-left', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : -9.87
+
+('light-green', 'oncoming-right', 'left-right', 'WP-forward')
+ -- forward : 1.06
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-forward', 'left-right', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.71
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-left', 'left-None', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.07
+ -- None : 1.58
+ -- left : -4.85
+
+('light-green', 'oncoming-right', 'left-None', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-None', 'left-forward', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.50
+
+('light-red', 'oncoming-left', 'left-None', 'WP-right')
+ -- forward : -4.96
+ -- right : 1.72
+ -- None : 0.16
+ -- left : -9.21
+
+('light-red', 'oncoming-None', 'left-right', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-right', 'left-forward', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-right', 'left-right', 'WP-left')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : -9.55
+
+('light-red', 'oncoming-forward', 'left-None', 'WP-right')
+ -- forward : 0.00
+ -- right : 1.84
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-forward', 'left-forward', 'WP-left')
+ -- forward : 0.00
+ -- right : 0.56
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-None', 'left-left', 'WP-forward')
+ -- forward : 0.60
+ -- right : 0.00
+ -- None : -2.31
+ -- left : 0.00
+
+('light-green', 'oncoming-right', 'left-right', 'WP-right')
+ -- forward : 0.64
+ -- right : 0.00
+ -- None : 0.00
+ -- left : -10.42
+
+('light-green', 'oncoming-forward', 'left-forward', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.91
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-forward', 'left-left', 'WP-left')
+ -- forward : -19.91
+ -- right : 0.00
+ -- None : 0.63
+ -- left : -4.78
+
+('light-red', 'oncoming-forward', 'left-left', 'WP-right')
+ -- forward : -4.65
+ -- right : 0.00
+ -- None : 0.31
+ -- left : 0.00
+
+('light-red', 'oncoming-forward', 'left-right', 'WP-forward')
+ -- forward : -4.88
+ -- right : 0.31
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-None', 'left-None', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.85
+ -- None : 1.67
+ -- left : 0.00
+
+('light-green', 'oncoming-forward', 'left-None', 'WP-forward')
+ -- forward : 2.13
+ -- right : 0.00
+ -- None : -2.85
+ -- left : 0.00
+
+('light-green', 'oncoming-left', 'left-forward', 'WP-left')
+ -- forward : 0.07
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-green', 'oncoming-forward', 'left-left', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.76
+ -- None : -2.31
+ -- left : 0.00
+
+('light-red', 'oncoming-forward', 'left-None', 'WP-forward')
+ -- forward : 0.00
+ -- right : 1.33
+ -- None : 0.00
+ -- left : -5.31
+
+('light-green', 'oncoming-forward', 'left-left', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : 0.00
+
+('light-red', 'oncoming-forward', 'left-forward', 'WP-left')
+ -- forward : 0.00
+ -- right : -9.87
+ -- None : 0.85
+ -- left : 0.00
+
+('light-green', 'oncoming-left', 'left-right', 'WP-right')
+ -- forward : 0.00
+ -- right : 1.19
+ -- None : -2.19
+ -- left : 0.00
+
+('light-red', 'oncoming-None', 'left-left', 'WP-right')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : -7.91
+
+('light-green', 'oncoming-left', 'left-left', 'WP-left')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : -2.40
+ -- left : 0.00
+
+('light-red', 'oncoming-left', 'left-left', 'WP-left')
+ -- forward : 0.00
+ -- right : 0.00
+ -- None : 0.00
+ -- left : -4.58
+
+('light-green', 'oncoming-None', 'left-None', 'WP-forward')
+ -- forward : 0.00
+ -- right : 0.59
+ -- None : -2.83
+ -- left : 0.75
+
+('light-green', 'oncoming-None', 'left-left', 'WP-right')
+ -- forward : 0.00
+ -- right : 1.44
+ -- None : -2.81
+ -- left : 0.43
+
+('light-green', 'oncoming-None', 'left-forward', 'WP-left')
+ -- forward : 0.12
+ -- right : 0.00
+ -- None : -2.73
+ -- left : 1.26
+
