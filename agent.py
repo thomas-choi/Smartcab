@@ -25,9 +25,9 @@ class LearningAgent(Agent):
         # Set any additional class parameters as needed
         self.stateCount = 0
         self.stepCount = 0
-        self.epsilon_step = 0.05
         self.turnFeatures = True
-        self.decay_f = 0      # use the default decay 
+        self.decay_f = 0               # use the default decay 
+        self.decay_alp = 0.01          # alpha for decay function
 
     def reset(self, destination=None, testing=False):
         """ The reset function is called at the beginning of each trial.
@@ -48,14 +48,11 @@ class LearningAgent(Agent):
             self.alpha = 0
         else:
             oldepi = self.epsilon
-            self.epsilon -= self.epsilon_step
+            self.epsilon -= self.decay_alp
             if self.decay_f == 1:
-                self.epsilon = self.alpha**self.stepCount 
+                self.epsilon = self.decay_alp**self.stepCount 
             elif self.decay_f == 2:
-                if self.stepCount > 0:
-                    self.epsilon = 1/(self.stepCount**2)
-            elif self.decay_f == 3:
-                self.epsilon = math.cos(self.alpha*self.stepCount)
+                self.epsilon = math.cos(self.decay_alp*self.stepCount)
             print "epsilon decay {}=>{}".format(oldepi, self.epsilon)
         return None
 
@@ -228,7 +225,7 @@ def run(t_alpha, t_ntest, t_epsilon, t_decayf, t_tolerance, t_step, improved, ca
     agent.learning = learningflag
     agent.alpha = t_alpha
     agent.epsilon = t_epsilon
-    agent.epsilon_step = t_step
+    agent.decay_alp = t_step
     agent.decay_f = t_decayf
     
     ##############
@@ -272,26 +269,27 @@ def gridsearch():
     check_alpha = [0.5, 0.75]
     check_ntest = [10, 20]
     check_epsilon = [1]
-    check_decayf = [0, 1, 2, 3]
-    check_tolerance = [0.05, 0.01]
-    check_tstep = [0.05, 0.005]  #  for decay function #0 only
+    check_decayf = [0, 1, 2]
+    check_tolerance = [0.05, 0.005]
+    check_tstep = {0:[0.05, 0.005], 1: [0.8, 0.9],  2:[0.001,0.0001]} #  for decay function 
     for a in check_alpha:
         for b in check_ntest:
             for c in check_epsilon:
                 for d in check_decayf:
                     for e in check_tolerance:
-                        for f in check_tstep:
+                        for f in check_tstep[d]:
                             run(a,b,c,d,e,f,True,caseN)
                             caseN += 1   
         
 if __name__ == '__main__':
     # no learning
-#    run(0.5, 10, 1, 0, 0.05, 0.05, False, 0, False)
+    run(0.5, 10, 1, 0, 0.05, 0.05, False, 0, False)
     
     # default learning
-#    run(0.5, 10, 1, 0, 0.05, 0.05, False, 0)
+    run(0.5, 10, 1, 0, 0.05, 0.05, False, 0)
     # run the GridSearch for best combination of parameters
     gridsearch()
+    run(0.5, 10, 1, 1, 0.005, 0.0005, True, 0)
 
     
     
